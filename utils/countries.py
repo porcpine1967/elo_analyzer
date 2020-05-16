@@ -2,6 +2,7 @@
 
 import csv
 import pathlib
+CURRENT_DIR = pathlib.Path(__file__).parent.absolute()
 
 class Country():
     def __init__(self, row):
@@ -15,7 +16,7 @@ class Country():
 
 def country_map():
     mappings = {}
-    with open('{}/{}'.format(pathlib.Path(__file__).parent.absolute(), 'country_map.csv')) as f:
+    with open('{}/{}'.format(CURRENT_DIR, 'country_map.csv')) as f:
         reader = csv.reader(f)
         for row in reader:
             mappings[row[0]] = row[1]
@@ -24,7 +25,7 @@ def country_map():
 def country_dict():
     countries = {}
     mappings = country_map()
-    with open('{}/{}'.format(pathlib.Path(__file__).parent.absolute(), 'countries_codes_and_coordinates.csv')) as f:
+    with open('{}/{}'.format(CURRENT_DIR, 'countries_codes_and_coordinates.csv')) as f:
         reader = csv.reader(f)
         for row in reader:
             country = Country(row)
