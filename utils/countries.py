@@ -3,24 +3,34 @@
 import csv
 import pathlib
 
-CONSOLIDATIONS = {
-
-}
-
 class Country():
     def __init__(self, row):
-        self.name, self.code, lat, long, self.player_count, self.loc = row
+        self.name, self.code, _, _, lat, long = row
         self.lat = float(lat)
         self.long = float(long)
+        self.loc = self.name
+
     def __str__(self):
-        return "{}, {}, lat: {}, long: {}".format(self.name, self.code, self.lat, self.long)
+        return "{}, {}, lat: {}, long: {}, loc: {}".format(self.name, self.code, self.lat, self.long, self.loc)
+
+def country_map():
+    mappings = {}
+    with open('{}/{}'.format(pathlib.Path(__file__).parent.absolute(), 'country_map.csv')) as f:
+        reader = csv.reader(f)
+        for row in reader:
+            mappings[row[0]] = row[1]
+    return mappings
 
 def country_dict():
     countries = {}
-    with open('{}/{}'.format(pathlib.Path(__file__).parent.absolute(), 'countries.csv')) as f:
+    mappings = country_map()
+    with open('{}/{}'.format(pathlib.Path(__file__).parent.absolute(), 'countries_codes_and_coordinates.csv')) as f:
         reader = csv.reader(f)
         for row in reader:
-            countries[row[1]] = Country(row)
+            country = Country(row)
+            if country.code in mappings:
+                country.loc = mappings[country.code]
+            countries[country.code] = country
     return countries
 
 if __name__ == '__main__':
