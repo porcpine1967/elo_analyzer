@@ -1,0 +1,5 @@
+This project is to graph elo to geographic region and various other things. Data is from aoe2.net.
+
+Conda environment: elo
+
+python 3.8, matplotlib, requests
