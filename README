@@ -3,3 +3,8 @@ This project is to graph elo to geographic region and various other things. Data
 Conda environment: elo
 
 python 3.8, matplotlib, requests
+
+To generate a table of elo by country:
+python3 utils/download.py
+
+python3 charts/table.py > chart.html

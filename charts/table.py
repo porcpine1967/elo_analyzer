@@ -85,6 +85,10 @@ if __name__ == '__main__':
         if cc in c and len(d[cc]) > 0:
             country = c[cc]
             if country.loc not in regions:
+                if country.loc != country.name and len(d[cc]) > 200:
+                    raise ValueError('{} ({}) should have its own line'.format(country.name, country.code))
+                elif country.loc == country.name and len(d[cc]) < 200:
+                    raise ValueError('{} ({}) should not have its own line'.format(country.name, country.code))
                 regions[country.loc] = Region(country.loc)
             regions[country.loc].elos.extend(d[cc])
         else:

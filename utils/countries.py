@@ -4,8 +4,6 @@ import csv
 import pathlib
 CURRENT_DIR = pathlib.Path(__file__).parent.absolute()
 
-import numpy as np
-
 class Country():
     def __init__(self, row):
         self.name, self.code, _, _, lat, long = row
